@@ -1,23 +1,39 @@
+import os
 from fpdf import FPDF
+import textwrap
 
+# Create output directory if it doesn't exist
+output_folder = "output"
+os.makedirs(output_folder, exist_ok=True)
+
+# Create a PDF object
 pdf = FPDF()
+pdf.set_auto_page_break(auto=True, margin=15)
 pdf.add_page()
 pdf.set_font("Helvetica", size=12)
 
-text = """bollywood_daemon_movie - A Human-Generated Bollywood Fantasy
+# Sample story/script content (replace this with your actual content)
+script_text = """
+VAIDEHI (serene): Why do I hear the thunder even in silence?
 
-Shah Rukh Khan as Vaidehi's Hero  
-Kajol as Vaidehi (bold, powerful Durga)  
-Salman Khan as the Daemon  
-Aamir Khan as Hanuman  
+DAEMON (grinning): Because I bring the storm where peace used to live.
 
-The daemon tempts souls with Black Forest Cake filled with rum balls.  
-Hanuman, chanting 'Shri Ram', counters with Satyanarayan prasad.
+HANUMAN (roars): You will not pass through fire when Vaidehi becomes fire itself.
 
-Vaidehi (Kajol) is no bechari. She fights with laughter, power, and love.  
-Together, they save the souls and fly to heaven on Mt. Fuji.
+NARRATOR: And thus begins the tale of courage, laughter, and celestial chaos!
+"""
 
-#HumanGenerated #BollywoodFiction #PythonStory"""
+# Wrap long lines safely to prevent FPDFException
+for line in script_text.strip().split("\n"):
+    if len(line.strip()) == 0:
+        pdf.ln(10)  # Blank line
+    else:
+        wrapped = textwrap.wrap(line.strip(), width=100)
+        for wline in wrapped:
+            pdf.multi_cell(0, 10, wline, align='L')
 
-pdf.multi_cell(0, 10, text)
-pdf.output("bollywood_daemon_movie.pdf")
+# Output PDF file
+output_path = os.path.join(output_folder, "bollywood_daemon_movie.pdf")
+pdf.output(output_path)
+
+print(f"PDF successfully generated at: {output_path}")
