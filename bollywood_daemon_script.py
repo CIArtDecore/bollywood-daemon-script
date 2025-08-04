@@ -1,53 +1,23 @@
 from fpdf import FPDF
 
-class PDF(FPDF):
-    def header(self):
-        self.set_font("Helvetica", size=12)
-        self.set_text_color(50, 50, 50)
-        self.cell(0, 10, "Simran vs Daemon: The Swiss Masala Movie", ln=True, align="C")
-
-    def footer(self):
-        self.set_y(-15)
-        self.set_font("Helvetica", size=8)
-        self.set_text_color(128)
-        self.cell(0, 10, f"Page {self.page_no()}", align="C")
-
-# Create PDF instance
-pdf = PDF()
-pdf.set_auto_page_break(auto=True, margin=15)
+pdf = FPDF()
 pdf.add_page()
 pdf.set_font("Helvetica", size=12)
 
-# Movie content (you can replace this with your script)
-movie_script = """
-Title: Simran vs The Chocolate Daemon
+text = """bollywood_daemon_movie - A Human-Generated Bollywood Fantasy
 
-Scene 1: Switzerland - Snowy Mountains
-Simran (Kajol) laughs loudly, smashing a chocolate cake the daemon offered.
+Shah Rukh Khan as Vaidehi's Hero  
+Kajol as Vaidehi (bold, powerful Durga)  
+Salman Khan as the Daemon  
+Aamir Khan as Hanuman  
 
-Simran: "Main koi abla naari nahi hoon, samjhe?!"
-Daemon: *runs away scared*
-Hanuman Ji: "Ram naam satya hai! Yeh cake nahi, daanav ka jaal hai!"
+The daemon tempts souls with Black Forest Cake filled with rum balls.  
+Hanuman, chanting 'Shri Ram', counters with Satyanarayan prasad.
 
-Scene 2: Bollywood Dance Battle
-SRK: "Main hoon Raj, tumhara chocolate lover!"
-Simran: *drops kick on daemon’s head*
-Hanuman Ji: *performs bhangra*
+Vaidehi (Kajol) is no bechari. She fights with laughter, power, and love.  
+Together, they save the souls and fly to heaven on Mt. Fuji.
 
-Scene 3: Moral of the story
-Stay away from suspicious desserts and believe in your inner Durga!
-"""
+#HumanGenerated #BollywoodFiction #PythonStory"""
 
-# Replace any em dash or curly quotes with standard characters
-safe_script = (
-    movie_script.replace("—", "-")
-    .replace("“", '"')
-    .replace("”", '"')
-    .replace("‘", "'")
-    .replace("’", "'")
-)
-
-pdf.multi_cell(0, 10, safe_script)
-
-# Save PDF
-pdf.output("Simran_vs_Daemon_Script.pdf")
+pdf.multi_cell(0, 10, text)
+pdf.output("bollywood_daemon_movie.pdf")
